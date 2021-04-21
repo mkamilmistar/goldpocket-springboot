@@ -30,8 +30,17 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public void updateCustomer(Integer id, Customer customer) {
+        Customer customerToUpdate = customerRepository.getOne(id);
+        customerToUpdate.setFirstName(customer.getFirstName());
+        customerToUpdate.setLastName(customer.getLastName());
+        customerToUpdate.setBirthDate(customer.getBirthDate());
+        customerToUpdate.setAddress(customer.getAddress());
+        customerToUpdate.setStatus(customer.getStatus());
+        customerToUpdate.setUsername(customer.getUsername());
+        customerToUpdate.setPassword(customer.getPassword());
+        customerToUpdate.setEmail(customer.getEmail());
+        customerRepository.save(customerToUpdate);
     }
 
     @Override
