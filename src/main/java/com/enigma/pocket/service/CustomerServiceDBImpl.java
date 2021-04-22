@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -27,8 +28,8 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> findCustomers(String firstName, String email, Pageable pageable) {
-        return customerRepository.findAllByFirstNameStartsWithOrEmailContaining(firstName, email, pageable);
+    public List<Customer> findCustomers(String firstName, String email, Date fromDate, Date toDate, Pageable pageable) {
+        return customerRepository.findAllByFirstNameStartsWithAndEmailContainingAndBirthDateBetween(firstName, email, fromDate, toDate, pageable);
     }
 
     @Override
