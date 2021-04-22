@@ -23,8 +23,8 @@ public class CustomerRestController {
     @GetMapping("/customers")
     public List<Customer> findCustomers(@RequestParam(name = "firstName", defaultValue = "") String firstName,
                                         @RequestParam(name = "email", defaultValue = "") String email,
-                                        @RequestParam(name = "page") Integer page,
-                                        @RequestParam(name = "size") Integer size)
+                                        @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                        @RequestParam(name = "size", defaultValue = "10") Integer size)
     {
         Pageable pageable = PageRequest.of(page, size);
         return customerService.findCustomers(firstName, email, pageable);
