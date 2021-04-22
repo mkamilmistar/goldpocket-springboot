@@ -1,18 +1,18 @@
 package com.enigma.pocket.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "m_customer")
+@Table(name = "m_customers")
 public class Customer {
 
     @Id //menandai kalau primary key
-    @Column(name = "customer_id")
-    private Integer customerId;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -27,12 +27,12 @@ public class Customer {
     private String password;
     private String email;
 
-    public Integer getCustomerId() {
-        return customerId;
+    public String getId() {
+        return id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -102,7 +102,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId=" + customerId +
+                "customerId=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthDate=" + birthDate +

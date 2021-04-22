@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class CustomerSearchDto {
 
-    private Integer customerId;
+    private Integer id;
     private String firstName;
     private String lastName;
 
@@ -22,12 +22,12 @@ public class CustomerSearchDto {
     private String password;
     private String email;
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {

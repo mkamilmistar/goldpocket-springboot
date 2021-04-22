@@ -6,10 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CustomerService {
-    public Customer findCustomerById(Integer id);
+    public Customer findCustomerById(String id);
 //    public List<Customer> findCustomers(String firstName, String email, Date fromDate, Date toDate, Pageable pageable);
     public Page<Customer> findCustomers(CustomerSearchDto customerSearchForm, Pageable pageable);
     public void createCustomer(Customer customer);
     public void updateCustomer(Customer customer);
-    public void removeCustomer(Integer id);
+    public void removeCustomer(String id);
 }
