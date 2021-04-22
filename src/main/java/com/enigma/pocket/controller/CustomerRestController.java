@@ -3,6 +3,7 @@ package com.enigma.pocket.controller;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,16 +24,13 @@ public class CustomerRestController {
     }
 
     @GetMapping("/customers")
-    public List<Customer> findCustomers(@RequestParam(name = "firstName", defaultValue = "") String firstName,
-                                        @RequestParam(name = "email", defaultValue = "") String email,
-                                        @RequestParam(name = "fromDate") Date fromDate,
-                                        @RequestParam(name = "toDate") Date toDate,
+    public Page<Customer> findCustomers(@RequestBody Customer customer,
                                         @RequestParam(name = "page", defaultValue = "0") Integer page,
                                         @RequestParam(name = "size", defaultValue = "10") Integer size
                                        )
     {
         Pageable pageable = PageRequest.of(page, size);
-        return customerService.findCustomers(firstName, email, fromDate, toDate, pageable);
+        return customerService.findCustomers(customer, pageable);
     }
 
     @PostMapping("/customer/create")

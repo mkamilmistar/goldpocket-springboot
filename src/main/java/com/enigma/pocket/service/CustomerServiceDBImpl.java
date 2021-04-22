@@ -3,8 +3,11 @@ package com.enigma.pocket.service;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.exception.CustomerNotFoundException;
 import com.enigma.pocket.repository.CustomerRepository;
+import com.enigma.pocket.specification.CustomerSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,8 +31,10 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> findCustomers(String firstName, String email, Date fromDate, Date toDate, Pageable pageable) {
-        return customerRepository.findAllByFirstNameStartsWithAndEmailContainingAndBirthDateBetween(firstName, email, fromDate, toDate, pageable);
+    public Page<Customer> findCustomers(Customer customerSearchForm, Pageable pageable) {
+        Specification<Customer> specification = CustomerSpecification.findCustomers(customerSearchForm);
+        return customerRepository.findAll(specification, pageable);
+//        return customerRepository.findAllByFirstNameStartsWithAndEmailContaining(customerSearchForm.getFirstName(),customerSearchForm.getEmail(), pageable);
     }
 
     @Override
