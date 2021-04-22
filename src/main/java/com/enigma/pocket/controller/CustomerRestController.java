@@ -3,6 +3,8 @@ package com.enigma.pocket.controller;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,12 @@ public class CustomerRestController {
 
     @GetMapping("/customers")
     public List<Customer> findCustomers(@RequestParam(name = "firstName", defaultValue = "") String firstName,
-                                        @RequestParam(name = "email", defaultValue = "") String email){
-        return customerService.findCustomers(firstName, email);
+                                        @RequestParam(name = "email", defaultValue = "") String email,
+                                        @RequestParam(name = "page") Integer page,
+                                        @RequestParam(name = "size") Integer size)
+    {
+        Pageable pageable = PageRequest.of(page, size);
+        return customerService.findCustomers(firstName, email, pageable);
     }
 
     @PostMapping("/customer/create")
