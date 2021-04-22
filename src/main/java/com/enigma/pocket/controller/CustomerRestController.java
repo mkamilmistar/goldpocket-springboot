@@ -19,8 +19,9 @@ public class CustomerRestController {
     }
 
     @GetMapping("/customers")
-    public List<Customer> findCustomers(){
-        return customerService.findCustomers();
+    public List<Customer> findCustomers(@RequestParam(name = "firstName", defaultValue = "") String firstName,
+                                        @RequestParam(name = "email", defaultValue = "") String email){
+        return customerService.findCustomers(firstName, email);
     }
 
     @PostMapping("/customer/create")

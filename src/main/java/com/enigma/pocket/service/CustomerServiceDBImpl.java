@@ -26,8 +26,8 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> findCustomers() {
-        return customerRepository.findAll();
+    public List<Customer> findCustomers(String firstName, String email) {
+        return customerRepository.findAllByFirstNameStartsWithOrEmailContaining(firstName, email);
     }
 
     @Override
