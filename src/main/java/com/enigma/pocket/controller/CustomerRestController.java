@@ -28,9 +28,9 @@ public class CustomerRestController {
         customerService.createCustomer(customer);
     }
 
-    @PatchMapping("/customer/{id}/edit")
-    public void editCustomer(@PathVariable(name = "id") Integer id,@RequestBody Customer customer){
-        customerService.updateCustomer(id, customer);
+    @PutMapping("/customer")
+    public void editCustomer(@RequestBody Customer customer){
+        customerService.updateCustomer(customer);
     }
 
     @PostMapping("/customer/{id}/delete")

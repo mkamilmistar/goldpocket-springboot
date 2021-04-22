@@ -1,20 +1,26 @@
 package com.enigma.pocket.service;
 
 import com.enigma.pocket.entity.Customer;
+import com.enigma.pocket.exception.CustomerNotFoundException;
 import com.enigma.pocket.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @Service
 public class CustomerServiceDBImpl implements CustomerService{
 
+    private final String notFoundMessage = "Customer with id: %s Not Found";
+
     @Autowired
     CustomerRepository customerRepository;
 
     @Override
     public Customer findCustomerById(Integer id) {
+        validatePresent(id);
         Customer customer = customerRepository.findById(id).get();
         return customer;
     }
@@ -30,17 +36,18 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public void updateCustomer(Integer id, Customer customer) {
-        Customer customerToUpdate = customerRepository.getOne(id);
-        customerToUpdate.setFirstName(customer.getFirstName());
-        customerToUpdate.setLastName(customer.getLastName());
-        customerToUpdate.setBirthDate(customer.getBirthDate());
-        customerToUpdate.setAddress(customer.getAddress());
-        customerToUpdate.setStatus(customer.getStatus());
-        customerToUpdate.setUsername(customer.getUsername());
-        customerToUpdate.setPassword(customer.getPassword());
-        customerToUpdate.setEmail(customer.getEmail());
-        customerRepository.save(customerToUpdate);
+    public void updateCustomer(Customer customer) {
+        validatePresent(customer.getCustomerId());
+        customerRepository.save(customer);
+    }
+
+    private void validatePresent(Integer id) {
+        if(!customerRepository.findById(id).isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, id));
+
+            //another way with make class
+            //throw new CustomerNotFoundException(String.format(notFoundMessage, id));
+        }
     }
 
     @Override
