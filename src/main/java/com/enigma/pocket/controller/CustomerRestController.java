@@ -1,5 +1,6 @@
 package com.enigma.pocket.controller;
 
+import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class CustomerRestController {
     }
 
     @GetMapping("/customers")
-    public Page<Customer> findCustomers(@RequestBody Customer customer,
+    public Page<Customer> findCustomers(@RequestBody CustomerSearchDto customerSearchForm,
                                         @RequestParam(name = "page", defaultValue = "0") Integer page,
                                         @RequestParam(name = "size", defaultValue = "10") Integer size
                                        )
     {
         Pageable pageable = PageRequest.of(page, size);
-        return customerService.findCustomers(customer, pageable);
+        return customerService.findCustomers(customerSearchForm, pageable);
     }
 
     @PostMapping("/customer/create")

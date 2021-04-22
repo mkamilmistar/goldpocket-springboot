@@ -1,5 +1,6 @@
 package com.enigma.pocket.service;
 
+import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.exception.CustomerNotFoundException;
 import com.enigma.pocket.repository.CustomerRepository;
@@ -31,7 +32,7 @@ public class CustomerServiceDBImpl implements CustomerService{
     }
 
     @Override
-    public Page<Customer> findCustomers(Customer customerSearchForm, Pageable pageable) {
+    public Page<Customer> findCustomers(CustomerSearchDto customerSearchForm, Pageable pageable) {
         Specification<Customer> specification = CustomerSpecification.findCustomers(customerSearchForm);
         return customerRepository.findAll(specification, pageable);
 //        return customerRepository.findAllByFirstNameStartsWithAndEmailContaining(customerSearchForm.getFirstName(),customerSearchForm.getEmail(), pageable);

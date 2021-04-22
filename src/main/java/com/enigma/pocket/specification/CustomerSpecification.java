@@ -1,5 +1,6 @@
 package com.enigma.pocket.specification;
 
+import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
@@ -13,7 +14,7 @@ import java.util.Collection;
 
 public class CustomerSpecification {
 
-    public static Specification<Customer> findCustomers(Customer customerSearchForm){
+    public static Specification<Customer> findCustomers(CustomerSearchDto customerSearchForm){
 
         return new Specification<Customer>() {
             @Override
