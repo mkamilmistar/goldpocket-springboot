@@ -1,9 +1,9 @@
-package com.enigma.crudProduct.service;
+package com.enigma.pocket.service;
 
-import com.enigma.crudProduct.dto.ProductSearchDto;
-import com.enigma.crudProduct.entity.Product;
-import com.enigma.crudProduct.repository.ProductRepository;
-import com.enigma.crudProduct.specification.ProductSpecification;
+import com.enigma.pocket.dto.ProductSearchDto;
+import com.enigma.pocket.entity.Product;
+import com.enigma.pocket.repository.ProductRepository;
+import com.enigma.pocket.specification.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Service
-public class ProductServiceDBImpl implements ProductService{
+public class ProductServiceDBImpl implements ProductService {
 
     private final String notFoundMessage = "Product with id: %s Not Found";
 
@@ -37,15 +36,14 @@ public class ProductServiceDBImpl implements ProductService{
     }
 
     @Override
-    public void createProduct(Product product) {
-        product.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        productRepository.save(product);
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public void updateProduct(Product product) {
+    public Product updateProduct(Product product) {
         validatePresent(product.getId());
-        productRepository.save(product);
+        return productRepository.save(product);
     }
 
     @Override

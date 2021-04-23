@@ -1,10 +1,10 @@
-package com.enigma.crudProduct.repository;
+package com.enigma.pocket.repository;
 
-import com.enigma.crudProduct.entity.HistoryProduct;
+import com.enigma.pocket.entity.ProductHistoryPrice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface HistoryProductRepository extends JpaRepository<HistoryProduct, String>, JpaSpecificationExecutor<HistoryProduct> {
+public interface ProductHistoryPriceRepository extends JpaRepository<ProductHistoryPrice, String>, JpaSpecificationExecutor<ProductHistoryPrice> {
 }

@@ -1,8 +1,8 @@
-package com.enigma.crudProduct.controller;
+package com.enigma.pocket.controller;
 
-import com.enigma.crudProduct.dto.ProductSearchDto;
-import com.enigma.crudProduct.entity.Product;
-import com.enigma.crudProduct.service.ProductService;
+import com.enigma.pocket.dto.ProductSearchDto;
+import com.enigma.pocket.entity.Product;
+import com.enigma.pocket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,13 +29,13 @@ public class ProductResController {
     }
 
     @PostMapping("/product/create")
-    public void createProduct(@RequestBody Product product){
-        productService.createProduct(product);
+    public Product createProduct(@RequestBody Product product){
+        return productService.createProduct(product);
     }
 
     @PutMapping("/product")
-    public void editProductById(@RequestBody Product product){
-        productService.updateProduct(product);
+    public Product editProductById(@RequestBody Product product){
+        return productService.updateProduct(product);
     }
 
     @DeleteMapping("/product/{id}/delete")

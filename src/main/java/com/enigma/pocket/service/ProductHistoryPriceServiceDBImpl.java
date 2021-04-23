@@ -1,9 +1,9 @@
 package com.enigma.pocket.service;
 
-import com.enigma.crudProduct.dto.HistoryProductSearchDto;
-import com.enigma.crudProduct.entity.HistoryProduct;
-import com.enigma.crudProduct.repository.HistoryProductRepository;
-import com.enigma.crudProduct.specification.HistoryProductSpecification;
+import com.enigma.pocket.dto.ProductHistoryPriceSearchDto;
+import com.enigma.pocket.entity.ProductHistoryPrice;
+import com.enigma.pocket.repository.ProductHistoryPriceRepository;
+import com.enigma.pocket.specification.ProductHistoryPriceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,46 +15,45 @@ import org.springframework.web.server.ResponseStatusException;
 import java.sql.Timestamp;
 
 @Service
-public class HistoryProductServiceDBImpl implements HistoryProductService{
+public class ProductHistoryPriceServiceDBImpl implements ProductHistoryPriceService {
 
     private final String notFoundMessage = "History Product with id: %s Not Found";
 
     @Autowired
-    HistoryProductRepository historyProductRepository;
+    ProductHistoryPriceRepository productHistoryPriceRepository;
 
     @Override
-    public HistoryProduct getHistoryProductById(String id) {
+    public ProductHistoryPrice getHistoryProductById(String id) {
         validatePresent(id);
-        HistoryProduct historyProduct = historyProductRepository.findById(id).get();
+        ProductHistoryPrice historyProduct = productHistoryPriceRepository.findById(id).get();
         return historyProduct;
     }
 
     @Override
-    public Page<HistoryProduct> findAllHistoryProduct(HistoryProductSearchDto historyProductSearchForm, Pageable pageable) {
-        Specification<HistoryProduct> specification = HistoryProductSpecification.findHistoryProducts(historyProductSearchForm);
-        return historyProductRepository.findAll(specification, pageable);
+    public Page<ProductHistoryPrice> findAllHistoryProduct(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
+        Specification<ProductHistoryPrice> specification = ProductHistoryPriceSpecification.findHistoryProducts(historyProductSearchForm);
+        return productHistoryPriceRepository.findAll(specification, pageable);
     }
 
     @Override
-    public HistoryProduct createNewHistoryProduct(HistoryProduct historyProduct) {
-        historyProduct.setHistoryDate(new Timestamp(System.currentTimeMillis()));
-        return historyProductRepository.save(historyProduct);
+    public ProductHistoryPrice createNewHistoryProduct(ProductHistoryPrice historyProduct) {
+        return productHistoryPriceRepository.save(historyProduct);
     }
 
     @Override
-    public HistoryProduct updateHistoryProduct(HistoryProduct historyProduct) {
+    public ProductHistoryPrice updateHistoryProduct(ProductHistoryPrice historyProduct) {
         validatePresent(historyProduct.getId());
-        return historyProductRepository.save(historyProduct);
+        return productHistoryPriceRepository.save(historyProduct);
     }
 
     @Override
     public void removeHistoryProductById(String id) {
         validatePresent(id);
-        historyProductRepository.deleteById(id);
+        productHistoryPriceRepository.deleteById(id);
     }
 
     private void validatePresent(String id) {
-        if(!historyProductRepository.findById(id).isPresent()){
+        if(!productHistoryPriceRepository.findById(id).isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, id));
         }
     }

@@ -1,7 +1,8 @@
-package com.enigma.crudProduct.specification;
+package com.enigma.pocket.specification;
 
-import com.enigma.crudProduct.dto.ProductSearchDto;
-import com.enigma.crudProduct.entity.Product;
+
+import com.enigma.pocket.dto.ProductSearchDto;
+import com.enigma.pocket.entity.Product;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

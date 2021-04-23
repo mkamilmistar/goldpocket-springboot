@@ -2,14 +2,16 @@ package com.enigma.pocket.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 
-public class HistoryProductSearchDto {
+public class ProductHistoryPriceSearchDto {
     private String id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Timestamp historyDate;
-    private Integer priceBuy;
-    private Integer priceSell;
+
+    private Date historyDate;
+    private BigDecimal priceBuy;
+    private BigDecimal priceSell;
     private String productId;
 
     public String getId() {
@@ -20,27 +22,27 @@ public class HistoryProductSearchDto {
         this.id = id;
     }
 
-    public Timestamp getHistoryDate() {
+    public Date getHistoryDate() {
         return historyDate;
     }
 
-    public void setHistoryDate(Timestamp historyDate) {
+    public void setHistoryDate(Date historyDate) {
         this.historyDate = historyDate;
     }
 
-    public Integer getPriceBuy() {
+    public BigDecimal getPriceBuy() {
         return priceBuy;
     }
 
-    public void setPriceBuy(Integer priceBuy) {
+    public void setPriceBuy(BigDecimal priceBuy) {
         this.priceBuy = priceBuy;
     }
 
-    public Integer getPriceSell() {
+    public BigDecimal getPriceSell() {
         return priceSell;
     }
 
-    public void setPriceSell(Integer priceSell) {
+    public void setPriceSell(BigDecimal priceSell) {
         this.priceSell = priceSell;
     }
 

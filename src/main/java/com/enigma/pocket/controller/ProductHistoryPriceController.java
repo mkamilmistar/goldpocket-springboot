@@ -1,48 +1,46 @@
-package com.enigma.crudProduct.controller;
+package com.enigma.pocket.controller;
 
-import com.enigma.crudProduct.dto.HistoryProductSearchDto;
-import com.enigma.crudProduct.entity.HistoryProduct;
-import com.enigma.crudProduct.service.HistoryProductService;
+import com.enigma.pocket.dto.ProductHistoryPriceSearchDto;
+import com.enigma.pocket.entity.ProductHistoryPrice;
+import com.enigma.pocket.service.ProductHistoryPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-public class HistoryProductResController {
+public class ProductHistoryPriceController {
 
     @Autowired
-    HistoryProductService historyProductService;
+    ProductHistoryPriceService productHistoryPriceService;
 
     @GetMapping("/history-product/{id}")
-    public HistoryProduct getHistoryProductById(@PathVariable(name = "id") String id){
-        return historyProductService.getHistoryProductById(id);
+    public ProductHistoryPrice getHistoryProductById(@PathVariable(name = "id") String id){
+        return productHistoryPriceService.getHistoryProductById(id);
     }
 
     @GetMapping("/history-products")
-    public Page<HistoryProduct> findAllHistoryProduct(@RequestBody HistoryProductSearchDto historyProductSearchForm,
+    public Page<ProductHistoryPrice> findAllHistoryProduct(@RequestBody ProductHistoryPriceSearchDto historyProductSearchForm,
                                                       @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                       @RequestParam(name = "size", defaultValue = "10") Integer size){
 
         Pageable pageable = PageRequest.of(page,size);
-        return historyProductService.findAllHistoryProduct(historyProductSearchForm, pageable);
+        return productHistoryPriceService.findAllHistoryProduct(historyProductSearchForm, pageable);
     }
 
     @PostMapping("/history-product/create")
-    public HistoryProduct createNewHistoryProduct(@RequestBody HistoryProduct historyProduct){
-        return historyProductService.createNewHistoryProduct(historyProduct);
+    public ProductHistoryPrice createNewHistoryProduct(@RequestBody ProductHistoryPrice historyProduct){
+        return productHistoryPriceService.createNewHistoryProduct(historyProduct);
     }
 
     @PutMapping("/history-product")
-    public HistoryProduct updateHistoryProduct(@RequestBody HistoryProduct historyProduct){
-        return historyProductService.updateHistoryProduct(historyProduct);
+    public ProductHistoryPrice updateHistoryProduct(@RequestBody ProductHistoryPrice historyProduct){
+        return productHistoryPriceService.updateHistoryProduct(historyProduct);
     }
 
     @DeleteMapping("history-product/{id}/delete")
     public void removeHistoryProductById(@PathVariable(name = "id") String id){
-        historyProductService.removeHistoryProductById(id);
+        productHistoryPriceService.removeHistoryProductById(id);
     }
 }

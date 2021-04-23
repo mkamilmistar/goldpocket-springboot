@@ -8,7 +8,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "m_product_prices")
-public class ProductHistoryPriceDto {
+public class ProductHistoryPrice {
 
     @Id
     @GeneratedValue(generator = "system-uuid")

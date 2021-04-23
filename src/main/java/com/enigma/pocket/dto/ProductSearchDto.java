@@ -1,21 +1,22 @@
-package com.enigma.crudProduct.dto;
+package com.enigma.pocket.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import java.math.BigDecimal;
+import java.sql.Date;
 
 public class ProductSearchDto {
 
     private String id;
-    private String productImage;
     private String productName;
-    private Integer productPriceBuy;
-    private Integer productPriceSell;
+    private BigDecimal productPriceBuy;
+    private BigDecimal productPriceSell;
+    private String productImage;
     private Integer productStatus;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Timestamp createdAt;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Timestamp updatedAt;
+
+    @Column(name = "created_at")
+    private Date createdDate;
+    @Column(name = "updated_at")
+    private Date updatedDate;
 
     public String getId() {
         return id;
@@ -23,14 +24,6 @@ public class ProductSearchDto {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
     }
 
     public String getProductName() {
@@ -41,20 +34,28 @@ public class ProductSearchDto {
         this.productName = productName;
     }
 
-    public Integer getProductPriceBuy() {
+    public BigDecimal getProductPriceBuy() {
         return productPriceBuy;
     }
 
-    public void setProductPriceBuy(Integer productPriceBuy) {
+    public void setProductPriceBuy(BigDecimal productPriceBuy) {
         this.productPriceBuy = productPriceBuy;
     }
 
-    public Integer getProductPriceSell() {
+    public BigDecimal getProductPriceSell() {
         return productPriceSell;
     }
 
-    public void setProductPriceSell(Integer productPriceSell) {
+    public void setProductPriceSell(BigDecimal productPriceSell) {
         this.productPriceSell = productPriceSell;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public Integer getProductStatus() {
@@ -65,19 +66,19 @@ public class ProductSearchDto {
         this.productStatus = productStatus;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
     }
 }

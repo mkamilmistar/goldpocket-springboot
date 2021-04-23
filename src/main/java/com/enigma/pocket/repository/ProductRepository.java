@@ -1,6 +1,6 @@
-package com.enigma.crudProduct.repository;
+package com.enigma.pocket.repository;
 
-import com.enigma.crudProduct.entity.Product;
+import com.enigma.pocket.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

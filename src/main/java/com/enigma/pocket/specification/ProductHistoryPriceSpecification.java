@@ -1,5 +1,6 @@
 package com.enigma.pocket.specification;
 
+import com.enigma.pocket.dto.ProductHistoryPriceSearchDto;
 import com.enigma.pocket.entity.ProductHistoryPrice;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -10,8 +11,8 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class HistoryProductSpecification {
-    public static Specification<ProductHistoryPrice> findHistoryProducts(ProductHistoryPrice historyProductSearchForm){
+public class ProductHistoryPriceSpecification {
+    public static Specification<ProductHistoryPrice> findHistoryProducts(ProductHistoryPriceSearchDto historyProductSearchForm){
         return new Specification<ProductHistoryPrice>() {
             @Override
             public Predicate toPredicate(Root<ProductHistoryPrice> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
