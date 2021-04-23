@@ -2,6 +2,7 @@ package com.enigma.pocket.service;
 
 import com.enigma.pocket.dto.ProductSearchDto;
 import com.enigma.pocket.entity.Product;
+import com.enigma.pocket.entity.ProductHistoryPrice;
 import com.enigma.pocket.repository.ProductRepository;
 import com.enigma.pocket.specification.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Service
 public class ProductServiceDBImpl implements ProductService {
@@ -21,6 +22,9 @@ public class ProductServiceDBImpl implements ProductService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    ProductHistoryPriceService productHistoryPriceService;
 
     @Override
     public Product findProductById(String id) {
@@ -37,6 +41,12 @@ public class ProductServiceDBImpl implements ProductService {
 
     @Override
     public Product createProduct(Product product) {
+        product.setCreatedDate(new Date());
+        product.setUpdatedDate(new Date());
+        Product savedProduct = productRepository.save(product);
+        ProductHistoryPrice productHistoryPrice = new ProductHistoryPrice(savedProduct);
+        productHistoryPriceService.createLogPrice(productHistoryPrice);
+
         return productRepository.save(product);
     }
 

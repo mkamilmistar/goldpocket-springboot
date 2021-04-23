@@ -30,13 +30,13 @@ public class ProductHistoryPriceServiceDBImpl implements ProductHistoryPriceServ
     }
 
     @Override
-    public Page<ProductHistoryPrice> findAllHistoryProduct(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
+    public Page<ProductHistoryPrice> findAllPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
         Specification<ProductHistoryPrice> specification = ProductHistoryPriceSpecification.findHistoryProducts(historyProductSearchForm);
         return productHistoryPriceRepository.findAll(specification, pageable);
     }
 
     @Override
-    public ProductHistoryPrice createNewHistoryProduct(ProductHistoryPrice historyProduct) {
+    public ProductHistoryPrice createLogPrice(ProductHistoryPrice historyProduct) {
         return productHistoryPriceRepository.save(historyProduct);
     }
 

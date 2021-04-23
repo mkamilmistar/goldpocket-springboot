@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "m_history_prices")
@@ -21,6 +21,16 @@ public class ProductHistoryPrice {
     private BigDecimal priceBuy;
     private BigDecimal priceSell;
     private String productId;
+
+    public ProductHistoryPrice() {
+    }
+
+    public ProductHistoryPrice(Product product) {
+        this.historyDate = product.getUpdatedDate();
+        this.priceBuy = product.getProductPriceBuy();
+        this.priceSell = product.getProductPriceSell();
+        this.productId = product.getId();
+    }
 
     public String getId() {
         return id;

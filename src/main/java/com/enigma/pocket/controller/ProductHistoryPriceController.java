@@ -26,12 +26,12 @@ public class ProductHistoryPriceController {
                                                       @RequestParam(name = "size", defaultValue = "10") Integer size){
 
         Pageable pageable = PageRequest.of(page,size);
-        return productHistoryPriceService.findAllHistoryProduct(historyProductSearchForm, pageable);
+        return productHistoryPriceService.findAllPrice(historyProductSearchForm, pageable);
     }
 
     @PostMapping("/history-product/create")
     public ProductHistoryPrice createNewHistoryProduct(@RequestBody ProductHistoryPrice historyProduct){
-        return productHistoryPriceService.createNewHistoryProduct(historyProduct);
+        return productHistoryPriceService.createLogPrice(historyProduct);
     }
 
     @PutMapping("/history-product")
