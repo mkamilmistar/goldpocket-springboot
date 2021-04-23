@@ -49,6 +49,11 @@ public class CustomerServiceDBImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
+    @Override
+    public void removeCustomer(String id) {
+        customerRepository.deleteById(id);
+    }
+
     private void validatePresent(String id) {
         if(!customerRepository.findById(id).isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, id));
@@ -58,8 +63,5 @@ public class CustomerServiceDBImpl implements CustomerService{
         }
     }
 
-    @Override
-    public void removeCustomer(String id) {
-        customerRepository.deleteById(id);
-    }
+
 }
