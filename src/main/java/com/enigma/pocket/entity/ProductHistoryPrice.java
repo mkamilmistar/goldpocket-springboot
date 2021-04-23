@@ -1,13 +1,14 @@
 package com.enigma.pocket.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
-@Table(name = "m_product_prices")
+@Table(name = "m_history_prices")
 public class ProductHistoryPrice {
 
     @Id
@@ -15,6 +16,7 @@ public class ProductHistoryPrice {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date historyDate;
     private BigDecimal priceBuy;
     private BigDecimal priceSell;
