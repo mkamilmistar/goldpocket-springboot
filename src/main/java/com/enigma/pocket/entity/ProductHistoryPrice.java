@@ -20,7 +20,10 @@ public class ProductHistoryPrice {
     private Date historyDate;
     private BigDecimal priceBuy;
     private BigDecimal priceSell;
-    private String productId;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     public ProductHistoryPrice() {
     }
@@ -29,7 +32,7 @@ public class ProductHistoryPrice {
         this.historyDate = product.getUpdatedDate();
         this.priceBuy = product.getProductPriceBuy();
         this.priceSell = product.getProductPriceSell();
-        this.productId = product.getId();
+        this.product = product;
     }
 
     public String getId() {
@@ -64,22 +67,22 @@ public class ProductHistoryPrice {
         this.priceSell = priceSell;
     }
 
-    public String getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override
     public String toString() {
-        return "HistoryProduct{" +
+        return "ProductHistoryPrice{" +
                 "id='" + id + '\'' +
                 ", historyDate=" + historyDate +
                 ", priceBuy=" + priceBuy +
                 ", priceSell=" + priceSell +
-                ", productId='" + productId + '\'' +
+                ", product=" + product +
                 '}';
     }
 }

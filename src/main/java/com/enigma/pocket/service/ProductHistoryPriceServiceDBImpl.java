@@ -30,24 +30,24 @@ public class ProductHistoryPriceServiceDBImpl implements ProductHistoryPriceServ
     }
 
     @Override
-    public Page<ProductHistoryPrice> findAllPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
+    public Page<ProductHistoryPrice> findAllLogPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
         Specification<ProductHistoryPrice> specification = ProductHistoryPriceSpecification.findHistoryProducts(historyProductSearchForm);
         return productHistoryPriceRepository.findAll(specification, pageable);
     }
 
     @Override
-    public ProductHistoryPrice createLogPrice(ProductHistoryPrice historyProduct) {
+    public ProductHistoryPrice logPrice(ProductHistoryPrice historyProduct) {
         return productHistoryPriceRepository.save(historyProduct);
     }
 
     @Override
-    public ProductHistoryPrice updateHistoryProduct(ProductHistoryPrice historyProduct) {
+    public ProductHistoryPrice updateLogPrice(ProductHistoryPrice historyProduct) {
         validatePresent(historyProduct.getId());
         return productHistoryPriceRepository.save(historyProduct);
     }
 
     @Override
-    public void removeHistoryProductById(String id) {
+    public void removeLogPriceById(String id) {
         validatePresent(id);
         productHistoryPriceRepository.deleteById(id);
     }

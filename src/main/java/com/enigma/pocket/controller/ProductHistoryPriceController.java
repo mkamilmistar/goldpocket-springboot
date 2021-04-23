@@ -15,32 +15,32 @@ public class ProductHistoryPriceController {
     @Autowired
     ProductHistoryPriceService productHistoryPriceService;
 
-    @GetMapping("/history-product/{id}")
+    @GetMapping("/historyProduct/{id}")
     public ProductHistoryPrice getHistoryProductById(@PathVariable(name = "id") String id){
         return productHistoryPriceService.getHistoryProductById(id);
     }
 
-    @GetMapping("/history-products")
+    @GetMapping("/historyProducts")
     public Page<ProductHistoryPrice> findAllHistoryProduct(@RequestBody ProductHistoryPriceSearchDto historyProductSearchForm,
                                                       @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                       @RequestParam(name = "size", defaultValue = "10") Integer size){
 
         Pageable pageable = PageRequest.of(page,size);
-        return productHistoryPriceService.findAllPrice(historyProductSearchForm, pageable);
+        return productHistoryPriceService.findAllLogPrice(historyProductSearchForm, pageable);
     }
 
-    @PostMapping("/history-product/create")
+    @PostMapping("/historyProduct")
     public ProductHistoryPrice createNewHistoryProduct(@RequestBody ProductHistoryPrice historyProduct){
-        return productHistoryPriceService.createLogPrice(historyProduct);
+        return productHistoryPriceService.logPrice(historyProduct);
     }
 
-    @PutMapping("/history-product")
+    @PutMapping("/historyProduct")
     public ProductHistoryPrice updateHistoryProduct(@RequestBody ProductHistoryPrice historyProduct){
-        return productHistoryPriceService.updateHistoryProduct(historyProduct);
+        return productHistoryPriceService.updateLogPrice(historyProduct);
     }
 
-    @DeleteMapping("history-product/{id}/delete")
+    @DeleteMapping("historyProduct/{id}")
     public void removeHistoryProductById(@PathVariable(name = "id") String id){
-        productHistoryPriceService.removeHistoryProductById(id);
+        productHistoryPriceService.removeLogPriceById(id);
     }
 }

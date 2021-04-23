@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductHistoryPriceService {
     public ProductHistoryPrice getHistoryProductById(String id);
-    public Page<ProductHistoryPrice> findAllPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable);
-    public ProductHistoryPrice createLogPrice(ProductHistoryPrice historyProduct);
-    public ProductHistoryPrice updateHistoryProduct(ProductHistoryPrice historyProduct);
-    public void removeHistoryProductById(String id);
+    public Page<ProductHistoryPrice> findAllLogPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable);
+    public ProductHistoryPrice logPrice(ProductHistoryPrice historyProduct);
+    public ProductHistoryPrice updateLogPrice(ProductHistoryPrice historyProduct);
+    public void removeLogPriceById(String id);
 
 }

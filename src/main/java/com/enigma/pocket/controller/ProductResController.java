@@ -25,10 +25,10 @@ public class ProductResController {
                                        @RequestParam(name = "page", defaultValue = "0") Integer page,
                                        @RequestParam(name = "size", defaultValue = "10") Integer size){
         Pageable pageable = PageRequest.of(page, size);
-        return productService.findProducts(productSearchForm, pageable);
+        return productService.searchProducts(productSearchForm, pageable);
     }
 
-    @PostMapping("/product/create")
+    @PostMapping("/product")
     public Product createProduct(@RequestBody Product product){
         return productService.createProduct(product);
     }
@@ -38,7 +38,7 @@ public class ProductResController {
         return productService.updateProduct(product);
     }
 
-    @DeleteMapping("/product/{id}/delete")
+    @DeleteMapping("/product/{id}")
     public void deleteProductById(@PathVariable(name = "id") String id){
         productService.deleteProduct(id);
     }

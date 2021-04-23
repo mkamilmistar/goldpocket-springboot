@@ -34,7 +34,7 @@ public class ProductServiceDBImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findProducts(ProductSearchDto productSearchForm, Pageable pageable) {
+    public Page<Product> searchProducts(ProductSearchDto productSearchForm, Pageable pageable) {
         Specification<Product> specification = ProductSpecification.findProducts(productSearchForm);
         return productRepository.findAll(specification, pageable);
     }
@@ -42,18 +42,13 @@ public class ProductServiceDBImpl implements ProductService {
     @Override
     public Product createProduct(Product product) {
         product.setCreatedDate(new Date());
-        product.setUpdatedDate(new Date());
-        Product savedProduct = productRepository.save(product);
-        ProductHistoryPrice productHistoryPrice = new ProductHistoryPrice(savedProduct);
-        productHistoryPriceService.createLogPrice(productHistoryPrice);
-
-        return productRepository.save(product);
+        return persistProduct(product);
     }
 
     @Override
     public Product updateProduct(Product product) {
         validatePresent(product.getId());
-        return productRepository.save(product);
+        return persistProduct(product);
     }
 
     @Override
@@ -66,5 +61,19 @@ public class ProductServiceDBImpl implements ProductService {
         if(!productRepository.findById(id).isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, id));
         }
+
+    }
+
+    private Product persistProduct(Product product) {
+        product.setUpdatedDate(new Date());
+
+        //Simpan Product
+        Product savedProduct = productRepository.save(product);
+
+        //Simpan History Product
+        ProductHistoryPrice productHistoryPrice = new ProductHistoryPrice(savedProduct);
+        productHistoryPriceService.logPrice(productHistoryPrice);
+
+        return productRepository.save(product);
     }
 }
