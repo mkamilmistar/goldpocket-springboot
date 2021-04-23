@@ -2,6 +2,8 @@ package com.enigma.pocket.controller;
 
 import com.enigma.pocket.dto.ProductSearchDto;
 import com.enigma.pocket.entity.Product;
+import com.enigma.pocket.entity.ProductHistoryPrice;
+import com.enigma.pocket.service.ProductHistoryPriceService;
 import com.enigma.pocket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,15 +11,28 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProductResController {
 
     @Autowired
     ProductService productService;
 
+    @Autowired
+    ProductHistoryPriceService productHistoryPriceService;
+
     @GetMapping("/product/{id}")
     public Product getProductById(@PathVariable(name = "id") String id){
-        return productService.findProductById(id);
+        Product product = productService.findProductById(id);
+        product.setHistoryPrices(null);
+        return product;
+    }
+
+    //SUB-RESOURCES
+    @GetMapping("/product/{id}/histories")
+    public List<ProductHistoryPrice> getHistoryBuyProduct(@PathVariable(name = "id") String productId){
+        return productHistoryPriceService.findAllByProduct(productId);
     }
 
     @GetMapping("/products")
@@ -42,4 +57,6 @@ public class ProductResController {
     public void deleteProductById(@PathVariable(name = "id") String id){
         productService.deleteProduct(id);
     }
+
+
 }
