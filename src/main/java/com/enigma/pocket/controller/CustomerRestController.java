@@ -34,7 +34,7 @@ public class CustomerRestController {
         return customerService.findCustomers(customerSearchForm, pageable);
     }
 
-    @PostMapping("/customer/create")
+    @PostMapping("/customer")
     public void createNewCustomer(@RequestBody Customer customer){
         customerService.createCustomer(customer);
     }
@@ -44,7 +44,7 @@ public class CustomerRestController {
         customerService.updateCustomer(customer);
     }
 
-    @PostMapping("/customer/{id}/delete")
+    @PostMapping("/customer/{id}")
     public void deleteCustomerById(@PathVariable(name = "id") String id){
         customerService.removeCustomer(id);
     }
