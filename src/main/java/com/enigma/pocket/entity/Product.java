@@ -5,7 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "m_products")
@@ -21,6 +23,10 @@ public class Product {
     private BigDecimal productPriceSell;
     private String productImage;
     private Integer productStatus;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductHistoryPrice> historyPrices = new ArrayList<>();
+
 
     @Column(name = "created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -92,6 +98,14 @@ public class Product {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public List<ProductHistoryPrice> getHistoryPrices() {
+        return historyPrices;
+    }
+
+    public void setHistoryPrices(List<ProductHistoryPrice> historyPrices) {
+        this.historyPrices = historyPrices;
     }
 
     @Override
