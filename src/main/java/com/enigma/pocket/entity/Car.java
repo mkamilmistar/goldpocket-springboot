@@ -8,7 +8,6 @@ public class Car {
     public Car(String name, String brand, Engine engine) {
         this.name = name;
         this.brand = brand;
-        engine.setCar(this);
         this.engine = engine;
     }
 
