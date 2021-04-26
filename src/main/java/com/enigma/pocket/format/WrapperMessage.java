@@ -4,14 +4,14 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
-public class ResponseMessage<T>{
+public class WrapperMessage<T>{
 
     private Integer responseCode;
     private String description;
     private LocalDateTime timestamp;
     private T data;
 
-    public ResponseMessage(Integer responseCode, String description, T data) {
+    public WrapperMessage(Integer responseCode, String description, T data) {
         this.responseCode = responseCode;
         this.description = description;
         this.data = data;
@@ -19,8 +19,8 @@ public class ResponseMessage<T>{
 
     //FACTORY METHOD
     //mengembalikan dari constructor
-    public static <T> ResponseMessage<T> acceptedResponse(T data){
-        return new ResponseMessage<>(HttpStatus.ACCEPTED.value(), "SUCCESS", data);
+    public static <T> WrapperMessage<T> acceptedResponse(T data){
+        return new WrapperMessage<>(HttpStatus.ACCEPTED.value(), "SUCCESS", data);
     }
 
     public Integer getResponseCode() {
