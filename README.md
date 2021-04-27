@@ -19,10 +19,25 @@ Path: /purchase
 
 Method: POST
 
-body: 
+Body for Sell: 
 ```
 {
     "purchaseType": 1,
+    "purchaseDetails": [
+        {
+            "quantityInGram":2,
+            "pocket": {
+                "id" : "4028abff7913aaf1017913abc9020000"
+            }
+        }
+    ]
+}
+```
+
+Body for Buy:
+```
+{
+    "purchaseType": 0,
     "purchaseDetails": [
         {
             "quantityInGram":2,
