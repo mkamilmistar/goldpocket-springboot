@@ -1,6 +1,7 @@
 package com.enigma.pocket.service;
 
 import com.enigma.pocket.entity.Pocket;
+import com.enigma.pocket.entity.Purchase;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,5 +14,6 @@ public interface PocketService {
     public Pocket createNewPocket(Pocket pocket);
     public Pocket updatePocket(Pocket pocket);
     public void deletePocketById(String id);
-    public void topUp(Pocket pocket, Double qty);
+    public void topUp(Pocket pocket, Double qty, Integer purchaseType);
+    public List<Pocket> findAllPocketByCustomer(String customerId);
 }

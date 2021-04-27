@@ -62,4 +62,15 @@ public class Pocket {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "Pocket{" +
+                "id='" + id + '\'' +
+                ", pocketName='" + pocketName + '\'' +
+                ", pocketQty=" + pocketQty +
+                ", customer=" + customer +
+                ", product=" + product +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package com.enigma.pocket.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,8 +27,8 @@ public class Product {
     private Integer productStatus;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnoreProperties("product")
     private List<ProductHistoryPrice> historyPrices = new ArrayList<>();
-
 
     @Column(name = "created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

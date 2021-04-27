@@ -6,6 +6,9 @@ import com.enigma.pocket.entity.Purchase;
 import com.enigma.pocket.entity.PurchaseDetail;
 import com.enigma.pocket.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -31,9 +34,13 @@ public class PurchaseServiceDBImpl implements PurchaseService{
 
         for (PurchaseDetail purchaseDetail: purchase.getPurchaseDetails()){
             Pocket pocket = pocketService.getPocketById(purchaseDetail.getPocket().getId());
-            pocketService.topUp(pocket, purchaseDetail.getQuantityInGram());
+            pocketService.topUp(pocket, purchaseDetail.getQuantityInGram(), purchase.getPurchaseType());
             purchaseDetail.setProduct(pocket.getProduct());
-            purchaseDetail.setPrice(pocket.getProduct().getProductPriceSell());
+            if(purchase.getPurchaseType() == 0){
+                purchaseDetail.setPrice(pocket.getProduct().getProductPriceSell());
+            }else{
+                purchaseDetail.setPrice(pocket.getProduct().getProductPriceBuy());
+            }
             purchaseDetail.setPurchase(purchase);
         }
 
@@ -46,8 +53,8 @@ public class PurchaseServiceDBImpl implements PurchaseService{
     }
 
     @Override
-    public List<Purchase> findAllPurchase() {
-        return purchaseRepository.findAll();
+    public Page<Purchase> findAllPurchase(Pageable pageable) {
+        return purchaseRepository.findAll(pageable);
     }
 }
 

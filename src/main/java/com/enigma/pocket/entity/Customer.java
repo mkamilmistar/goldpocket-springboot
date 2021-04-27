@@ -1,9 +1,12 @@
 package com.enigma.pocket.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "m_customers")
@@ -26,6 +29,10 @@ public class Customer {
     private String username;
     private String password;
     private String email;
+
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnoreProperties("customer")
+    List<Pocket> pockets = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -99,18 +106,11 @@ public class Customer {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", address='" + address + '\'' +
-                ", status=" + status +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public List<Pocket> getPockets() {
+        return pockets;
+    }
+
+    public void setPockets(List<Pocket> pockets) {
+        this.pockets = pockets;
     }
 }

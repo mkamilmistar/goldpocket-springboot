@@ -20,6 +20,8 @@ public class Purchase {
     @CreatedDate
     private Date purchaseDate;
 
+    private Integer purchaseType;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
@@ -58,5 +60,13 @@ public class Purchase {
 
     public void setPurchaseDetails(Set<PurchaseDetail> purchaseDetails) {
         this.purchaseDetails = purchaseDetails;
+    }
+
+    public Integer getPurchaseType() {
+        return purchaseType;
+    }
+
+    public void setPurchaseType(Integer purchaseType) {
+        this.purchaseType = purchaseType;
     }
 }

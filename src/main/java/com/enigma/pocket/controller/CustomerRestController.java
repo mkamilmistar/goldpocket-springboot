@@ -2,7 +2,9 @@ package com.enigma.pocket.controller;
 
 import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
+import com.enigma.pocket.entity.Pocket;
 import com.enigma.pocket.service.CustomerService;
+import com.enigma.pocket.service.PocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,14 @@ public class CustomerRestController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    PocketService pocketService;
+
+    @GetMapping("/customer/{id}/pocket")
+    public List<Pocket> getPocketByCustomer(@PathVariable(name = "id") String customerId){
+        return pocketService.findAllPocketByCustomer(customerId);
+    }
 
     @GetMapping("/customer/{id}")
     public Customer getCustomerById(@PathVariable(name = "id") String id){

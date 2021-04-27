@@ -1,6 +1,8 @@
 package com.enigma.pocket.service;
 
+import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.entity.Pocket;
+import com.enigma.pocket.repository.CustomerRepository;
 import com.enigma.pocket.repository.PocketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +16,13 @@ import java.util.List;
 @Service
 public class PocketServiceDBImpl implements PocketService{
 
-    private final String notFoundMessage = "Customer with id: %s Not Found";
+    private final String notFoundMessage = "Pocket with id: %s Not Found";
 
     @Autowired
     PocketRepository pocketRepository;
+
+    @Autowired
+    CustomerService customerService;
 
     @Override
     public Pocket getPocketById(String id) {
@@ -37,6 +42,12 @@ public class PocketServiceDBImpl implements PocketService{
     }
 
     @Override
+    public List<Pocket> findAllPocketByCustomer(String customerId) {
+        Customer customer = customerService.findCustomerById(customerId);
+        return customer.getPockets();
+    }
+
+    @Override
     public Pocket updatePocket(Pocket pocket) {
         validatePresent(pocket.getId());
         return pocketRepository.save(pocket);
@@ -49,8 +60,12 @@ public class PocketServiceDBImpl implements PocketService{
     }
 
     @Override
-    public void topUp(Pocket pocket, Double qty) {
-        pocket.setPocketQty(pocket.getPocketQty()+qty);
+    public void topUp(Pocket pocket, Double qty, Integer purchaseType) {
+        if(purchaseType == 0){
+            pocket.setPocketQty(pocket.getPocketQty()+qty);
+        } else{
+            pocket.setPocketQty(pocket.getPocketQty()-qty);
+        }
         pocketRepository.save(pocket);
     }
 
