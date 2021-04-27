@@ -36,7 +36,7 @@ public class PocketServiceDBImpl implements PocketService{
     }
 
     @Override
-    public Pocket editPocket(Pocket pocket) {
+    public Pocket updatePocket(Pocket pocket) {
         validatePresent(pocket.getId());
         return pocketRepository.save(pocket);
     }

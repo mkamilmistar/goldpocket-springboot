@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class PocketController {
 
@@ -35,7 +33,7 @@ public class PocketController {
 
     @PutMapping("/pocket")
     public Pocket editPocket(@RequestBody Pocket pocket){
-        return pocketService.editPocket(pocket);
+        return pocketService.updatePocket(pocket);
     }
 
     @DeleteMapping("/pocket/{id}")

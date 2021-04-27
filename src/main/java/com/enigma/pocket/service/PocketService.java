@@ -11,6 +11,6 @@ public interface PocketService {
     public Pocket getPocketById(String id);
     public Page<Pocket> findAllPocket(Pageable pageable);
     public Pocket createNewPocket(Pocket pocket);
-    public Pocket editPocket(Pocket pocket);
+    public Pocket updatePocket(Pocket pocket);
     public void deletePocketById(String id);
 }

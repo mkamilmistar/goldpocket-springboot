@@ -1,7 +1,7 @@
 package com.enigma.pocket.controller;
 
-import com.enigma.pocket.entity.Car;
-import com.enigma.pocket.entity.Engine;
+import com.enigma.pocket.dto.Car;
+import com.enigma.pocket.dto.Engine;
 import com.enigma.pocket.format.WrapperMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

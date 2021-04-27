@@ -1,4 +1,4 @@
-package com.enigma.pocket.entity;
+package com.enigma.pocket.dto;
 
 public class Car {
     private String name;
