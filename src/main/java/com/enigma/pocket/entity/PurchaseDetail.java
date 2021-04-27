@@ -1,5 +1,6 @@
 package com.enigma.pocket.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,13 +17,19 @@ public class PurchaseDetail {
     private String id;
 
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private BigDecimal price;
-    private BigDecimal quantityInGram;
+    private Double quantityInGram;
 
     @ManyToOne
+    @JoinColumn(name = "purchase_id")
     private Purchase purchase;
+
+    @ManyToOne
+    @JoinColumn(name = "pocket_id")
+    private Pocket pocket;
 
     public String getId() {
         return id;
@@ -48,11 +55,11 @@ public class PurchaseDetail {
         this.price = price;
     }
 
-    public BigDecimal getQuantityInGram() {
+    public Double getQuantityInGram() {
         return quantityInGram;
     }
 
-    public void setQuantityInGram(BigDecimal quantityInGram) {
+    public void setQuantityInGram(Double quantityInGram) {
         this.quantityInGram = quantityInGram;
     }
 
@@ -62,5 +69,13 @@ public class PurchaseDetail {
 
     public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
+    }
+
+    public Pocket getPocket() {
+        return pocket;
+    }
+
+    public void setPocket(Pocket pocket) {
+        this.pocket = pocket;
     }
 }

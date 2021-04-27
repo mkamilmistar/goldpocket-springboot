@@ -32,6 +32,7 @@ public class PocketServiceDBImpl implements PocketService{
 
     @Override
     public Pocket createNewPocket(Pocket pocket) {
+        pocket.setPocketQty(0.0);
         return pocketRepository.save(pocket);
     }
 
@@ -45,6 +46,12 @@ public class PocketServiceDBImpl implements PocketService{
     public void deletePocketById(String id) {
         validatePresent(id);
         pocketRepository.deleteById(id);
+    }
+
+    @Override
+    public void topUp(Pocket pocket, Double qty) {
+        pocket.setPocketQty(pocket.getPocketQty()+qty);
+        pocketRepository.save(pocket);
     }
 
     private void validatePresent(String id) {

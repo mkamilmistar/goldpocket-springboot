@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class PocketController {
+public class PocketResController {
 
     @Autowired
     PocketService pocketService;

@@ -13,4 +13,5 @@ public interface PocketService {
     public Pocket createNewPocket(Pocket pocket);
     public Pocket updatePocket(Pocket pocket);
     public void deletePocketById(String id);
+    public void topUp(Pocket pocket, Double qty);
 }
