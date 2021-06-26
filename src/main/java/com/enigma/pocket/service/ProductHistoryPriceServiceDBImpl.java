@@ -30,14 +30,16 @@ public class ProductHistoryPriceServiceDBImpl implements ProductHistoryPriceServ
     @Override
     public ProductHistoryPrice getHistoryProductById(String id) {
         validatePresent(id);
-        ProductHistoryPrice historyProduct = productHistoryPriceRepository.findById(id).get();
+//        ProductHistoryPrice historyProduct = productHistoryPriceRepository.findById(id).get();
+        ProductHistoryPrice historyProduct = productHistoryPriceRepository.getHistoryById(id);
         return historyProduct;
     }
 
     @Override
     public Page<ProductHistoryPrice> findAllLogPrice(ProductHistoryPriceSearchDto historyProductSearchForm, Pageable pageable) {
         Specification<ProductHistoryPrice> specification = ProductHistoryPriceSpecification.findHistoryProducts(historyProductSearchForm);
-        return productHistoryPriceRepository.findAll(specification, pageable);
+//        return productHistoryPriceRepository.findAll(specification, pageable);
+        return productHistoryPriceRepository.getAllHistory(specification, pageable);
     }
 
     @Override
@@ -60,7 +62,8 @@ public class ProductHistoryPriceServiceDBImpl implements ProductHistoryPriceServ
     @Override
     public void removeLogPriceById(String id) {
         validatePresent(id);
-        productHistoryPriceRepository.deleteById(id);
+//        productHistoryPriceRepository.deleteById(id);
+        productHistoryPriceRepository.deleteHistoryById(id);
     }
 
     private void validatePresent(String id) {

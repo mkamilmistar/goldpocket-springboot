@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping("/v1")
 public class CustomerRestController {
 
     @Autowired

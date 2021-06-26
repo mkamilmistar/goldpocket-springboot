@@ -27,12 +27,13 @@ public class PocketServiceDBImpl implements PocketService{
     @Override
     public Pocket getPocketById(String id) {
         validatePresent(id);
-        return pocketRepository.findById(id).get();
+//        return pocketRepository.findById(id).get();
+        return pocketRepository.getPocketById(id);
     }
 
     @Override
     public Page<Pocket> findAllPocket(Pageable pageable) {
-        return pocketRepository.findAll(pageable);
+        return pocketRepository.getAllPocket(pageable);
     }
 
     @Override
@@ -56,7 +57,8 @@ public class PocketServiceDBImpl implements PocketService{
     @Override
     public void deletePocketById(String id) {
         validatePresent(id);
-        pocketRepository.deleteById(id);
+//        pocketRepository.deleteById(id);
+        pocketRepository.deletePocketById(id);
     }
 
     @Override

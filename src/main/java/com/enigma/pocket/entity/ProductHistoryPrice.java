@@ -23,7 +23,7 @@ public class ProductHistoryPrice {
     private BigDecimal priceBuy;
     private BigDecimal priceSell;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "product_id")
     @JsonIgnoreProperties({"historyPrices"})
     private Product product;

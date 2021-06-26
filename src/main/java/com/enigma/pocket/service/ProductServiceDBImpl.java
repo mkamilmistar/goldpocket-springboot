@@ -29,14 +29,16 @@ public class ProductServiceDBImpl implements ProductService {
     @Override
     public Product findProductById(String id) {
         validatePresent(id);
-        Product product = productRepository.findById(id).get();
+//        Product product = productRepository.findById(id).get();
+        Product product = productRepository.getProductById(id);
         return product;
     }
 
     @Override
     public Page<Product> searchProducts(ProductSearchDto productSearchForm, Pageable pageable) {
         Specification<Product> specification = ProductSpecification.findProducts(productSearchForm);
-        return productRepository.findAll(specification, pageable);
+//        return productRepository.findAll(specification, pageable);
+        return productRepository.searchProduct(specification, pageable);
     }
 
     @Override
@@ -54,7 +56,8 @@ public class ProductServiceDBImpl implements ProductService {
     @Override
     public void deleteProduct(String id) {
         validatePresent(id);
-        productRepository.deleteById(id);
+//        productRepository.deleteById(id);
+        productRepository.deleteProductById(id);
     }
 
     private void validatePresent(String id) {

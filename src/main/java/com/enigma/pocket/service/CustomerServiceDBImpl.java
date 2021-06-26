@@ -27,20 +27,23 @@ public class CustomerServiceDBImpl implements CustomerService{
     @Override
     public Customer findCustomerById(String id) {
         validatePresent(id);
-        Customer customer = customerRepository.findById(id).get();
+//        Customer customer = customerRepository.findById(id).get();
+        Customer customer = customerRepository.getCustomerById(id);
         return customer;
     }
 
     @Override
     public Page<Customer> findCustomers(CustomerSearchDto customerSearchForm, Pageable pageable) {
         Specification<Customer> specification = CustomerSpecification.findCustomers(customerSearchForm);
-        return customerRepository.findAll(specification, pageable);
+        return customerRepository.getAllCustomer(specification, pageable);
+//        return customerRepository.findAll(specification, pageable);
 //        return customerRepository.findAllByFirstNameStartsWithAndEmailContaining(customerSearchForm.getFirstName(),customerSearchForm.getEmail(), pageable);
     }
 
     @Override
     public void createCustomer(Customer customer) {
         customerRepository.save(customer);
+//        customerRepository.createCustomerNative(customer);
     }
 
     @Override
@@ -51,7 +54,8 @@ public class CustomerServiceDBImpl implements CustomerService{
 
     @Override
     public void removeCustomer(String id) {
-        customerRepository.deleteById(id);
+        customerRepository.deleteCustomerById(id);
+//        customerRepository.deleteById(id);
     }
 
     private void validatePresent(String id) {

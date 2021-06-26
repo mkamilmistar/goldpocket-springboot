@@ -49,12 +49,14 @@ public class PurchaseServiceDBImpl implements PurchaseService{
 
     @Override
     public Purchase findPurchaseById(String id) {
-        return purchaseRepository.findById(id).get();
+//        return purchaseRepository.findById(id).get();
+        return purchaseRepository.getPurchaseById(id);
     }
 
     @Override
     public Page<Purchase> findAllPurchase(Pageable pageable) {
-        return purchaseRepository.findAll(pageable);
+//        return purchaseRepository.findAll(pageable);
+        return purchaseRepository.getAllPurchase(pageable);
     }
 }
 

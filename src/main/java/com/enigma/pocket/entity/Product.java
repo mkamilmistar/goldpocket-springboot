@@ -26,7 +26,7 @@ public class Product {
     private String productImage;
     private Integer productStatus;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnoreProperties("product")
     private List<ProductHistoryPrice> historyPrices = new ArrayList<>();
 
