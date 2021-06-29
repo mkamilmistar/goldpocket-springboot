@@ -47,15 +47,15 @@ public class Pocket {
         this.pocketQty = pocketQty;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public void setCustomer(Customer customer) {
-        this.customer = customer;
+      this.customer = customer;
     }
 
-    public Product getProduct() {
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public Product getProduct() {
         return product;
     }
 

@@ -2,6 +2,7 @@ package com.enigma.pocket.service;
 
 import com.enigma.pocket.entity.Customer;
 import com.enigma.pocket.entity.Pocket;
+import com.enigma.pocket.model.request.GetPocketCustomerByProductRequest;
 import com.enigma.pocket.repository.CustomerRepository;
 import com.enigma.pocket.repository.PocketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,21 @@ public class PocketServiceDBImpl implements PocketService{
 
     @Override
     public List<Pocket> findAllPocketByCustomer(String customerId) {
-        Customer customer = customerService.findCustomerById(customerId);
-        return customer.getPockets();
+      Customer customer = customerService.findCustomerById(customerId);
+      List<Pocket> pocketByCustomer = customer.getPockets();
+
+      return pocketByCustomer;
     }
 
-    @Override
+
+  @Override
+  public List<Pocket> findPocketCustomerByProduct(GetPocketCustomerByProductRequest request) {
+    List<Pocket> pocketCustomerByProduct = pocketRepository.findPocketCustomerByProduct(request.getCustomerId(), request.getProductId());
+
+    return pocketCustomerByProduct;
+  }
+
+  @Override
     public Pocket updatePocket(Pocket pocket) {
         validatePresent(pocket.getId());
         return pocketRepository.save(pocket);

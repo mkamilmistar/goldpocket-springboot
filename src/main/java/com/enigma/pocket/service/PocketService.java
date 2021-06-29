@@ -2,6 +2,7 @@ package com.enigma.pocket.service;
 
 import com.enigma.pocket.entity.Pocket;
 import com.enigma.pocket.entity.Purchase;
+import com.enigma.pocket.model.request.GetPocketCustomerByProductRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,4 +17,5 @@ public interface PocketService {
     public void deletePocketById(String id);
     public void topUp(Pocket pocket, Double qty, Integer purchaseType);
     public List<Pocket> findAllPocketByCustomer(String customerId);
+    public List<Pocket> findPocketCustomerByProduct(GetPocketCustomerByProductRequest request);
 }

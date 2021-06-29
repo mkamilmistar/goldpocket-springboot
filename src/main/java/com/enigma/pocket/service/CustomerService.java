@@ -4,8 +4,10 @@ import com.enigma.pocket.dto.CustomerSearchDto;
 import com.enigma.pocket.entity.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerService {
+
     public Customer findCustomerById(String id);
 //    public List<Customer> findCustomers(String firstName, String email, Date fromDate, Date toDate, Pageable pageable);
     public Page<Customer> findCustomers(CustomerSearchDto customerSearchForm, Pageable pageable);

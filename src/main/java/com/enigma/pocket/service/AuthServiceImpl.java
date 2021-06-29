@@ -23,7 +23,9 @@ public class AuthServiceImpl implements AuthService{
   @Override
   public LoginView loginService(LoginRequest loginRequest) {
     String token = generateUUIDString();
+
     Customer customer = login(loginRequest);
+
     LoginView response = LoginView.builder()
       .userId(customer.getId())
       .token(token)
@@ -31,6 +33,9 @@ public class AuthServiceImpl implements AuthService{
       .firstName(customer.getFirstName())
       .lastName(customer.getLastName())
       .password(customer.getPassword())
+      .address(customer.getAddress())
+      .birthDate(customer.getBirthDate())
+      .email(customer.getEmail())
       .build();
 
     return response;

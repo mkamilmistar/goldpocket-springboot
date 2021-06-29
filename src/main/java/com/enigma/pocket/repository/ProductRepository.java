@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String>, JpaSpecificationExecutor<Product> {
 
@@ -25,4 +27,6 @@ public interface ProductRepository extends JpaRepository<Product, String>, JpaSp
     @Modifying
     @Transactional
     void deleteProductById(String productId);
+
+    Product findProductByProductName(String productName);
 }

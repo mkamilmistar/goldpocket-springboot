@@ -1,12 +1,15 @@
 package com.enigma.pocket.controller;
 
 import com.enigma.pocket.entity.Pocket;
+import com.enigma.pocket.model.request.GetPocketCustomerByProductRequest;
 import com.enigma.pocket.service.PocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1")
@@ -25,6 +28,14 @@ public class PocketResController {
                                      @RequestParam(name = "size", defaultValue = "10") Integer size){
         Pageable pageable = PageRequest.of(page,size);
         return pocketService.findAllPocket(pageable);
+    }
+
+    @PostMapping(value = "/pocket/customer-by-product")
+    public List<Pocket> pocketCustomerByProduct(
+      @RequestBody GetPocketCustomerByProductRequest request
+    ) {
+      List<Pocket> getPocketCustomerByProduct = pocketService.findPocketCustomerByProduct(request);
+      return getPocketCustomerByProduct;
     }
 
     @PostMapping("/pocket")

@@ -30,6 +30,12 @@ public class ProductResController {
         return product;
     }
 
+    @GetMapping("/product-by-name")
+    public Product getProductByName(@RequestParam(name = "search") String productName) {
+      return productService.findProductByName(productName);
+    }
+
+
     //SUB-RESOURCES
     @GetMapping("/product/{id}/histories")
     public List<ProductHistoryPrice> getHistoryBuyProduct(@PathVariable(name = "id") String productId){

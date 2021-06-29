@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductServiceDBImpl implements ProductService {
@@ -34,7 +35,7 @@ public class ProductServiceDBImpl implements ProductService {
         return product;
     }
 
-    @Override
+  @Override
     public Page<Product> searchProducts(ProductSearchDto productSearchForm, Pageable pageable) {
         Specification<Product> specification = ProductSpecification.findProducts(productSearchForm);
 //        return productRepository.findAll(specification, pageable);
@@ -60,7 +61,13 @@ public class ProductServiceDBImpl implements ProductService {
         productRepository.deleteProductById(id);
     }
 
-    private void validatePresent(String id) {
+  @Override
+  public Product findProductByName(String productName) {
+      String nameToCapitale = productName.substring(0, 1).toUpperCase() + productName.substring(1);
+      return productRepository.findProductByProductName(nameToCapitale);
+  }
+
+  private void validatePresent(String id) {
         if(!productRepository.findById(id).isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format(notFoundMessage, id));
         }
